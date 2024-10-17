@@ -1,13 +1,15 @@
 name: Tests
+
 on:
   push:
-    branches: main
-    on:
-    pull_request:
-    branches: main
-    on:
-    repository_dispatch:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  repository_dispatch:
     types: [run-tests]
+
 jobs:
   tests:
     timeout-minutes: 60
