@@ -22,7 +22,7 @@ const {EMAIL, PASSWORD} = process.env;
   // Verify logout is displayed on the header section
   await expect(page.locator('header[id="header"] a[href="/logout"]')).toBeVisible();
   // Save the storage state (cookies, local storage)
-  await context.storageState({ path: 'storageState. json' });
+  await context.storageState({ path: 'storageState.json' });
   // Close the browser
   await browser.close();
 })();
