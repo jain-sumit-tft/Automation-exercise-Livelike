@@ -1,9 +1,11 @@
 name: Tests
 on:
   push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+    branches: main
+    pull_request:
+    branches: main
+    repository_dispatch:
+    types: [run-tests]
 jobs:
   tests:
     timeout-minutes: 60
@@ -23,9 +25,9 @@ jobs:
       - name: Run Playwright tests
         run: |
           yarn run:test
-        # env:
-        #   USER_NAME: ${{ secrets.USER_NAME }}
-        #   PASSWORD: ${{ secrets.PASSWORD }}
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
