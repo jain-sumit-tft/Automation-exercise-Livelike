@@ -31,9 +31,9 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://automationexercise.com/',
-    video: "retain-on-failure",
+    video: 'retain-on-failure',
     screenshot: {
-      mode: "only-on-failure",
+      mode: 'only-on-failure',
       // fullPage: true,
     },
 
@@ -86,4 +86,3 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-

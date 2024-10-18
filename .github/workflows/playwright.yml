@@ -19,9 +19,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install
+      - name: Run ESLint
+        run: yarn lint # Run ESLint checks
+      - name: Run Prettier
+        run: yarn prettier:check # Check Prettier formatting
       - name: Install playwright deps
         run: yarn playwright install-deps chromium
       - name: Playwright browser install
