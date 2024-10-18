@@ -9,37 +9,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'yarn'
-          
+
       - name: Install dependencies
         run: yarn install
-        
+
       - name: Run ESLint
         run: yarn lint # Run ESLint checks
-        
+
       - name: Run Prettier
         run: yarn prettier:check # Check Prettier formatting
-        
+
       - name: Install Playwright dependencies
         run: yarn playwright install-deps chromium
-        
+
       - name: Install Playwright browser
         run: yarn playwright install chromium
-        
+
       - name: Run Playwright tests
         run: |
           yarn run:test
-          
+
         env:
           EMAIL: ${{ secrets.EMAIL }}
           INVALID_EMAIL: ${{ secrets.INVALID_EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
           NAME: ${{ secrets.NAME }}
-          
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
