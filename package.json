@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "run:test": "npx playwright test",
-    "run:login": "node setup/login_setup.js"
+    "run:test": "npx playwright test"
   },
   "keywords": [],
   "author": "",

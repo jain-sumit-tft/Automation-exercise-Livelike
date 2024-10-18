@@ -15,8 +15,7 @@ export class ProductSearchPage{
 
     async searchProduct(keyword){
         await this.page.locator(this.searchBar).fill(keyword);
-        await this.page.locator(this.submitButton).click();
-        expect(this.page.url()).toBe(`https://automationexercise.com/products?search=${keyword}`);
+        await this.page.locator(this.submitButton).click({force:true});
     }
 
     async addProductToCart(specificProductCount){

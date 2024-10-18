@@ -8,7 +8,7 @@ on:
     branches:
       - main
   repository_dispatch:
-    types: [run-tests]
+    types: run-tests
 
 jobs:
   tests:

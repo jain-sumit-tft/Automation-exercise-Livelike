@@ -8,10 +8,12 @@ export class LoginSignUpPage{
         this.fillEmail = `${this.loginForm} [action="/login"] [data-qa="login-email"]`;
         this.fillPassword = `${this.loginForm} [action="/login"] [placeholder="Password"]`;
         this.loginButton = `${this.loginForm} [action="/login"] [data-qa="login-button"]`;
+        this.loginErrorMessage = `${this.loginForm} [action="/login"] p`;
         this.signUpForm = '.signup-form';
         this.signUpUsernameField = `${this.signUpForm} [action="/signup"] [data-qa="signup-name"]`
         this.signUpEmailField =`${this.signUpForm} [action="/signup"] [data-qa="signup-email"]`
         this.signUpButton = `${this.signUpForm} [action="/signup"] [data-qa="signup-button"]`
+        this.signUpErrorMessage = `${this.signUpForm} [action="/signup"] p`;
         this.registrationForm = '.login-form';
         this.checkRadioTitleButton = (title) => `${this.registrationForm} input[type="radio"][value="${title}"]`
         this.nameField = `${this.registrationForm} input[name="name"]`
@@ -28,10 +30,19 @@ export class LoginSignUpPage{
         this.formSubmitButton = `${this.registrationForm} button[data-qa="create-account"]`
     }
 
-    async enterCredentialsAndLogin(email, password){
+    async loginWithValidCredentials(email, password){
         await this.page.locator(this.fillEmail).fill(email);
         await this.page.locator(this.fillPassword).fill(password);
         await this.page.locator(this.loginButton).click()
+        expect(this.page.locator('header[id="header"] a[href="/logout"]')).toBeVisible();
+    }
+
+    async loginWithInvalidCredentials(email, password){
+        await this.page.locator(this.fillEmail).fill(email);
+        await this.page.locator(this.fillPassword).fill(password);
+        await this.page.locator(this.loginButton).click()
+        const message = await this.page.locator(this.loginErrorMessage).textContent();
+        expect(message).toBe('Your email or password is incorrect!');
     }
 
     async generateRandomString(length){
@@ -77,6 +88,14 @@ export class LoginSignUpPage{
         await this.page.locator(this.zipcodeFieldSelector).fill('10000')
         await this.page.locator(this.mobileNumFieldSelector).fill('900000000')
         await this.page.locator(this.formSubmitButton).click()
+    }
+
+    async signUpWithExistingUser(userName, emailID){
+        await this.page.locator(this.signUpUsernameField).fill(userName);
+        await this.page.locator(this.signUpEmailField).fill(emailID);
+        await this.page.locator(this.signUpButton).click()
+        const message = await this.page.locator(this.signUpErrorMessage).textContent();
+        expect(message).toBe('Email Address already exist!');
     }
 
     async verifySuccessAccountCreationMessage(){
