@@ -10,7 +10,7 @@
 
 4. Key features -
    ~ Configured the CI/CD tool to run automation tests on workflow
-   ~ Supports multiple browsers and ES module
+   ~ Supports ES module
    ~ Framework follows the page object design pattern
    ~ Supports Eslint and Prettier checks
    ~ Supports dot env for login credentials
@@ -32,3 +32,6 @@
 
 8. Reporters -
    ~ Configured HTML reports in playwright.config.js and output of the reports can be found - test-results/report
+   ~ Reports can be visible by running yarn playwright show-report
+
+9. Synchronize the automation tests with dev branch of https://github.com/ShiviAND/react-redux-realworld-example-app. Created pull request https://github.com/jain-sumit-tft/react-redux-realworld-example-app/pull/1
