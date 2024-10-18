@@ -2,9 +2,6 @@ name: Run Automation Tests
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev
 
 jobs:
   tests:
