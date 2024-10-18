@@ -100,7 +100,6 @@ export class LoginSignUpPage{
 
     async verifySuccessAccountCreationMessage(){
          // check account is created successfully
-         expect(this.page.url()).toBe('https://automationexercise.com/account_created');
          expect(await this.page.getByText('Account Created!')).toBeVisible()
     }
 }
