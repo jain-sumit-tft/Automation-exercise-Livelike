@@ -19,20 +19,23 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  // expect: {
-  //   timeout: 60 * 1000,
-  // },
-  // Timeout for each test, includes test, hooks and fixtures:
-  // timeout: 3 * 60 * 1000,
+  workers: process.env.CI ? 1 : 5,
+  expect: {
+    timeout: 30 * 100,
+  },
+  //Timeout for each test, includes test, hooks and fixtures:
+  timeout: 1 * 60 * 1000,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['html', { outputFolder: 'test-results/report', open: 'never' }], // HTML report
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://automationexercise.com/',
+    video: 'retain-on-failure',
     screenshot: {
-      mode: "only-on-failure",
+      mode: 'only-on-failure',
       // fullPage: true,
     },
 
@@ -85,4 +88,3 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-
