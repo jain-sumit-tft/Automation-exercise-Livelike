@@ -20,6 +20,7 @@ export default defineConfig({
   },
   //Timeout for each test, includes test, hooks and fixtures:
   timeout: 1 * 60 * 1000,
+  outputDir: 'test-results/output',
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html', { outputFolder: 'test-results/report', open: 'never' }], // HTML report

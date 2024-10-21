@@ -45,5 +45,6 @@ jobs:
         with:
           name: playwright-report
           path: |
-            test-results/**
+            test-results/report/**        # Path for the HTML report
+            test-results/output/**        # Path for the test results
           retention-days: 5
