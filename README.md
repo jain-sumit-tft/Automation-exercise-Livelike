@@ -23,7 +23,7 @@
 
 6. Reporters
 
-   - Reports can be visible by running yarn playwright show-report
+   - Run playwright tests "yarn run:test" then reports can be accessible using this command "yarn playwright show-report test-results/report"
    - Configured HTML reporters in playwright.config.js and output of the reports can be found - test-results/report
    - Playwright reports will be uploaded on CI/CD and available to download through pipeline
 
