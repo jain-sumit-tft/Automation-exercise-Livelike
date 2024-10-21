@@ -1,18 +1,16 @@
 import { test } from '@playwright/test';
 import { LoginSignUpPage } from '../pages/loginSignupPage';
-import dotenv from 'dotenv';
-dotenv.config();
 const { EMAIL, PASSWORD, INVALID_EMAIL } = process.env;
-
+let login;
 test.describe('Login Functionality', () => {
-  test('Login with valid credentials', async ({ page }) => {
-    const login = new LoginSignUpPage(page);
+  test.beforeEach(async ({ page }) => {
+    login = new LoginSignUpPage(page);
     await page.goto('/login');
+  });
+  test('Login with valid credentials', async () => {
     await login.loginWithValidCredentials(EMAIL, PASSWORD);
   });
-  test('Login with invalid credentials', async ({ page }) => {
-    const login = new LoginSignUpPage(page);
-    await page.goto('/login');
+  test('Login with invalid credentials', async () => {
     await login.loginWithInvalidCredentials(INVALID_EMAIL, PASSWORD);
   });
 });

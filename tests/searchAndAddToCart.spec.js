@@ -3,8 +3,6 @@ import { Header } from '../pages/header';
 import { LoginSignUpPage } from '../pages/loginSignupPage';
 import { CartPage } from '../pages/cartPage';
 import { ProductSearchPage } from '../pages/productSearchPage';
-import dotenv from 'dotenv';
-dotenv.config();
 const { EMAIL, PASSWORD } = process.env;
 
 test.describe('Search for product and add to cart', () => {
@@ -26,9 +24,8 @@ test.describe('Search for product and add to cart', () => {
     await productPage.searchProduct('Shirts');
     // Add 3rd last product to cart
     const text = await productPage.addProductToCart(3);
-    // verify cart page has the correct added product
+    // verify product is added on cart page
     await page.goto('/view_cart');
-    await page.waitForLoadState();
     await cartPage.verifyAddedProductTitle(text);
   });
 });

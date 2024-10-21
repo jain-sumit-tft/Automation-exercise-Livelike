@@ -1,11 +1,7 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+import dotenv from 'dotenv';
+dotenv.config();
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -32,6 +28,10 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
+    email: process.env.EMAIL,
+    password: process.env.PASSWORD,
+    name: process.env.NAME,
+    invalidEmail: process.env.INVALID_EMAIL,
     baseURL: 'https://automationexercise.com/',
     video: 'retain-on-failure',
     screenshot: {
