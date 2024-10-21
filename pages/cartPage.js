@@ -6,7 +6,6 @@ export class CartPage {
   }
 
   async verifyAddedProductTitle(expectedTitle) {
-    const productTitle = await this.cartItems;
-    expect(productTitle).toContainText[expectedTitle];
+    await expect(this.cartItems).toContainText([expectedTitle]);
   }
 }

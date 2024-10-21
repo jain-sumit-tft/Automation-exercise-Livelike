@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 export class Header {
   constructor(page) {
     this.page = page;
@@ -8,10 +7,5 @@ export class Header {
 
   async clickHeaderOption(option) {
     await this.headerOption(option).click();
-    expect(this.page.url()).toBe(`https://automationexercise.com/${option}`);
-  }
-
-  async verifyHeaderOptionVisible(option) {
-    expect(this.headerOption(option)).toBeVisible();
   }
 }

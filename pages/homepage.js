@@ -6,6 +6,6 @@ export class HomePage {
   }
 
   async verifyAutomationExerciseLogo() {
-    expect(this.logo).toBeVisible();
+    await expect(this.logo).toBeVisible();
   }
 }

@@ -60,7 +60,7 @@ export class LoginSignUpPage {
     return result;
   }
 
-  async signUpWithNewUserAndFillRegistrationForm() {
+  async signUpWithNewUserAndFillRegistrationForm(opts = {}) {
     const stringLength = 6;
     const firstName = `Test${await this.generateRandomString(stringLength)}`;
     const lastName = `Test${await this.generateRandomString(stringLength)}`;
@@ -79,19 +79,19 @@ export class LoginSignUpPage {
     // enter password
     await this.passwordField.fill(PASSWORD);
     // select day
-    await this.daySelector.selectOption('10');
+    await this.daySelector.selectOption(opts.day);
     // select month
-    await this.monthSelector.selectOption('12');
+    await this.monthSelector.selectOption(opts.month);
     // select year
-    await this.yearSelector.selectOption('1990');
+    await this.yearSelector.selectOption(opts.year);
     await this.firstNameField.fill(firstName);
     await this.lastNameField.fill(lastName);
-    await this.companyFieldSelector.fill('ABC LTD');
-    await this.addressFieldSelector.fill('XYZ Building');
-    await this.stateFieldSelector.fill('Haryana');
-    await this.cityFieldSelector.fill('Gurugram');
-    await this.zipcodeFieldSelector.fill('10000');
-    await this.mobileNumFieldSelector.fill('900000000');
+    await this.companyFieldSelector.fill(opts.company || 'ABC Inc');
+    await this.addressFieldSelector.fill(opts.address1);
+    await this.stateFieldSelector.fill(opts.state);
+    await this.cityFieldSelector.fill(opts.city);
+    await this.zipcodeFieldSelector.fill(opts.zipcode);
+    await this.mobileNumFieldSelector.fill(opts.mobile);
     await this.formSubmitButton.click();
   }
 
@@ -99,8 +99,6 @@ export class LoginSignUpPage {
     await this.signUpUsernameField.fill(userName);
     await this.signUpEmailField.fill(emailID);
     await this.signUpButton.click();
-    const message = await this.signUpErrorMessage.textContent();
-    expect(message).toBe('Email Address already exist!');
   }
 
   async verifySuccessAccountCreationMessage() {

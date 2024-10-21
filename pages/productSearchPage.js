@@ -4,8 +4,11 @@ export class ProductSearchPage {
   constructor(page) {
     this.page = page;
     this.searchBar = page.locator('input[name="search"]');
-    this.submitButton = page.locator('button[id="submit_search"]');
+    this.submitButton = page.locator(
+      '[id="advertisement"] [id="submit_search"]'
+    );
     this.productItems = page.locator('.features_items div.col-sm-4');
+
     this.addToCartButton = page.locator(
       'a[class="btn btn-default add-to-cart"]'
     );
@@ -20,10 +23,10 @@ export class ProductSearchPage {
 
   async searchProduct(keyword) {
     await this.searchBar.fill(keyword);
-    await this.submitButton.click({ force: true });
+    await this.submitButton.click();
   }
 
-  async addProductToCart(specificProductCount) {
+  async addProductToCartByPosition(specificProductCount) {
     const products = await this.productItems;
     const productCount = await products.count();
     const thirdLastProduct = products.nth(productCount - specificProductCount);

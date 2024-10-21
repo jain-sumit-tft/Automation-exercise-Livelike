@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { Header } from '../pages/header';
 import { LoginSignUpPage } from '../pages/loginSignupPage';
 import { CartPage } from '../pages/cartPage';
@@ -20,10 +20,12 @@ test.describe('Search for product and add to cart', () => {
     await login.loginWithValidCredentials(EMAIL, PASSWORD);
     // Go to products page
     await header.clickHeaderOption('products');
+    // Verify the page is navigated to correct page URL
+    await expect(page).toHaveURL('/products');
     // Search product Shirts
     await productPage.searchProduct('Shirts');
     // Add 3rd last product to cart
-    const text = await productPage.addProductToCart(3);
+    const text = await productPage.addProductToCartByPosition(3);
     // verify product is added on cart page
     await page.goto('/view_cart');
     await cartPage.verifyAddedProductTitle(text);
