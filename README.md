@@ -23,8 +23,9 @@
 
 6. Reporters
 
-   - Configured HTML reports in playwright.config.js and output of the reports can be found - test-results/report
    - Reports can be visible by running yarn playwright show-report
+   - Configured HTML reporters in playwright.config.js and output of the reports can be found - test-results/report
+   - Playwright reports will be uploaded on CI/CD and available to download through pipeline
 
 7. Synchronize CI/CD integration between automation framework and dev framework.
    The automation tests to trigger as soon as new commits are merged with master branch of https://github.com/jain-sumit-tft/react-redux-realworld-example-app.git.
