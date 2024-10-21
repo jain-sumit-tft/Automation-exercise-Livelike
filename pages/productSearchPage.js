@@ -17,26 +17,36 @@ export class ProductSearchPage {
     );
   }
 
-  async verifySearchBarIsVisible() {
-    expect(this.searchBar).toBeVisible();
-  }
-
+  /**
+   * Searches for a product using the provided keyword.
+   *
+   * @param {string} keyword - The keyword to search for in the product catalog.
+   * @returns {Promise<void>} Resolves when the search operation is complete.
+   */
   async searchProduct(keyword) {
     await this.searchBar.fill(keyword);
     await this.submitButton.click();
   }
 
+  /**
+   * Adds a product to the cart based on its position in the product list.
+   *
+   * @param {number} specificProductCount - The position of the product to add to the cart,
+   *                                         where 1 is the last product in the list.
+   * @returns {string} The title of the product that was added to the cart.
+   */
   async addProductToCartByPosition(specificProductCount) {
     const products = await this.productItems;
     const productCount = await products.count();
-    const thirdLastProduct = products.nth(productCount - specificProductCount);
-    await thirdLastProduct.scrollIntoViewIfNeeded();
+    const nthSpecificProduct = products.nth(
+      productCount - specificProductCount
+    );
     // fetch product title of third product
-    const text = await thirdLastProduct
+    const text = await nthSpecificProduct
       .locator('div div div p')
       .first()
       .textContent();
-    const addToCart = thirdLastProduct.locator(this.addToCartButton).first();
+    const addToCart = nthSpecificProduct.locator(this.addToCartButton).first();
     await addToCart.click();
     const assetAddedToCart = await this.productTitlesOnCartPage.first();
     expect(assetAddedToCart).toContainText(

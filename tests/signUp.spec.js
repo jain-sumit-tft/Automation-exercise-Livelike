@@ -9,7 +9,7 @@ test.describe('SignUp New User', () => {
     signUpForm = new LoginSignUpPage(page);
     await page.goto('/');
   });
-  test('Register with a new user', async () => {
+  test('Register with a new user', async ({ page }) => {
     // Open login/signUp page
     await header.clickHeaderOption('login');
     // enter random generated username, email id and fill registration form
@@ -24,9 +24,10 @@ test.describe('SignUp New User', () => {
       mobile: '9898767890',
     });
     // verify account is created successfully
-    await signUpForm.verifySuccessAccountCreationMessage();
+    await page.waitForLoadState('domcontentloaded');
+    expect(signUpForm.accountCreatedMsg).toBeVisible();
   });
-  test('Register with existing user', async () => {
+  test('Register with existing user and verify the error message displayed', async () => {
     // Open login/signUp page
     await header.clickHeaderOption('login');
     // enter existing username and email address

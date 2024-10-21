@@ -5,7 +5,13 @@ export class Header {
       page.locator(`header[id="header"] a[href="/${option}"]`);
   }
 
-  async clickHeaderOption(option) {
-    await this.headerOption(option).click();
+  /**
+   * Clicks on a specified header option.
+   *
+   * @param {string} header - The header option to click on, represented as a string.
+   * @returns {Promise<void>} Resolves when the click action is complete.
+   */
+  async clickHeaderOption(header) {
+    await this.headerOption(header).click();
   }
 }
